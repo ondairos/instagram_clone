@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import Head from "next/head";
+import Header from "@/components/Header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -11,7 +12,11 @@ export default function Home() {
         <title>Instagram Clone</title>
         <link rel="icon" href="./favicon.ico" />
       </Head>
-      <h1>This is Instagram 2.0 build</h1>
+      {/* header */}
+      <Header />
+      {/* feed */}
+
+      {/* modal */}
     </main>
   );
 }
