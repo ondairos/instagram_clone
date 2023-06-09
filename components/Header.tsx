@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React from "react";
 import Image from "next/image";
 import {
@@ -9,10 +10,11 @@ import {
   MenuIcon,
 } from "@heroicons/react/outline";
 import { HomeIcon } from "@heroicons/react/solid";
+import ProfilePic from "../public/profile_pic.jpg";
 
 export default function Header() {
   return (
-    <header>
+    <header className="shadow-md border-b bg-white sticky top-0 z-50">
       {/* left */}
       <div className="flex justify-between max-w-6xl mx-5 lg:mx-auto">
         <div className="relative hidden lg:inline-grid w-24 cursor-pointer">
@@ -51,7 +53,21 @@ export default function Header() {
         <div className="flex items-center justify-end space-x-4">
           <HomeIcon className="navButton" />
           <MenuIcon className="h-6 md:hidden cursor-pointer" />
-          <PaperAirplaneIcon className="navButton" />
+          <div className="relative navButton">
+            <PaperAirplaneIcon className="navButton rotate-45" />
+            <div className="absolute -top-1 -right-2 text-xs w-5 h-5 bg-red-500 rounded-full text-white flex items-center justify-center animate-pulse">
+              3
+            </div>
+          </div>
+          <PlusCircleIcon className="navButton" />
+          <UserGroupIcon className="navButton" />
+          <HeartIcon className="navButton" />
+
+          <Image
+            className="w-8 rounded-full cursor-pointer"
+            src={ProfilePic}
+            alt="profile_pic"
+          />
         </div>
       </div>
     </header>
