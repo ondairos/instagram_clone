@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { faker } from "@faker-js/faker";
+import Story from "./Story";
 
 export default function Stories() {
   // state
@@ -15,9 +16,15 @@ export default function Stories() {
   }, []);
 
   return (
-    <div>
+    <div className="flex space-x-2 p-6 bg-white border-gray-200 border rounded-sm overflow-x-scroll">
       {/* Stories */}
-      <p>Stories</p>
+      {suggestions.map((element) => (
+        <Story
+          key={element.id}
+          img={element.avatar}
+          username={element.username}
+        />
+      ))}
     </div>
   );
 }
