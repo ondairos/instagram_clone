@@ -1,7 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { faker } from "@faker-js/faker";
 
 export default function Stories() {
+  // state
+  const [suggestions, setSuggestions] = useState<SuggestionsType[]>([]);
   // populate a list of fake users
   useEffect(() => {
     const suggestions = [...Array(20)].map((_, index) => ({
@@ -9,7 +11,7 @@ export default function Stories() {
       id: index,
     }));
 
-    console.log(suggestions);
+    setSuggestions(suggestions);
   }, []);
 
   return (
