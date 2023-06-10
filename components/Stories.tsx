@@ -16,7 +16,7 @@ export default function Stories() {
   }, []);
 
   return (
-    <div className="flex space-x-2 p-6 bg-white border-gray-200 border rounded-sm overflow-x-scroll">
+    <div className="flex space-x-2 p-6 bg-white border-gray-200 border rounded-sm overflow-x-scroll scrollbar-thumb-black">
       {/* Stories */}
       {suggestions.map((element) => (
         <Story

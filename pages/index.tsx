@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   return (
-    <main className="">
+    <main className="bg-gray-50 h-screen overflow-y-scroll scrollbar-hide">
       <Head>
         <title>Instagram Clone</title>
         <link rel="icon" href="./favicon.ico" />
