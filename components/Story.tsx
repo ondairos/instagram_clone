@@ -1,7 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
 
-export default function Story({ img, username }: any) {
+type Props = {
+  img: string;
+  username: string;
+};
+
+export default function Story({ img, username }: Props) {
   return (
     <div>
       <img
