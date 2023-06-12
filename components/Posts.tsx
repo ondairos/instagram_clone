@@ -10,8 +10,8 @@ const POSTS = [
     caption: "PLEASE LIKE AND SUBSCRIBE!!",
   },
   {
-    id: "123",
-    username: "instagrammer1",
+    id: "124",
+    username: "korok1d2",
     userImg: "https://links.papareact.com/3ke",
     img: "https://links.papareact.com/3ke",
     caption: "PLEASE LIKE AND SUBSCRIBE!!",
@@ -32,7 +32,6 @@ export default function Posts() {
           caption={element.caption}
         />
       ))}
-      <p></p>
     </div>
   );
 }

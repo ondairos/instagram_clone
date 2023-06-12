@@ -1,4 +1,15 @@
+/* eslint-disable @next/next/no-img-element */
 import React from "react";
+import {
+  BookmarkIcon,
+  ChatIcon,
+  DotsHorizontalIcon,
+  EmojiHappyIcon,
+  HeartIcon,
+  PaperAirplaneIcon,
+} from "@heroicons/react/outline";
+
+import { HeartIcon as HeartIconFilled } from "@heroicons/react/solid";
 
 type Props = {
   id: string;
@@ -11,7 +22,10 @@ type Props = {
 export default function Post({ id, username, userImg, img, caption }: Props) {
   return (
     <div>
-      <h1>I am a post</h1>
+      <div>
+        <img src="" alt="" />
+        <p>{username}</p>
+      </div>
 
       {/* header */}
 
