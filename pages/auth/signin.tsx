@@ -1,11 +1,39 @@
 import React from "react";
+import { getProviders, signIn } from "next-auth/react";
 
-function signIn() {
+type Provider = {
+  id: string;
+  name: string;
+};
+
+type SigninProps = {
+  providers: Record<string, Provider>;
+};
+
+// browser
+function signin({ providers }: SigninProps) {
   return (
-    <div>
-      <h1>Sign in page</h1>
-    </div>
+    <>
+      {Object.values(providers).map((provider) => (
+        <div key={provider.name}>
+          <button onClick={() => signIn(provider.id)}>
+            Sign In with {provider.name}
+          </button>
+        </div>
+      ))}
+    </>
   );
 }
 
-export default signIn;
+// Server
+export async function getServerSideProps() {
+  const providers = await getProviders();
+
+  return {
+    props: {
+      providers,
+    },
+  };
+}
+
+export default signin;
