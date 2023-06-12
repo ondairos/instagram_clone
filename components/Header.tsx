@@ -11,8 +11,12 @@ import {
 } from "@heroicons/react/outline";
 import { HomeIcon } from "@heroicons/react/solid";
 import ProfilePic from "../public/profile_pic.jpg";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 export default function Header() {
+  const { data: session } = useSession();
+  // console.log(session);
+
   return (
     <header className="shadow-md border-b bg-white sticky top-0 z-50">
       {/* left */}
@@ -22,7 +26,7 @@ export default function Header() {
             src={"https://links.papareact.com/ocw"}
             alt=""
             fill
-            objectFit="contain"
+            style={{ objectFit: "contain" }}
           />
         </div>
 
@@ -31,7 +35,7 @@ export default function Header() {
             src={"https://links.papareact.com/jjm"}
             alt=""
             fill
-            objectFit="contain"
+            style={{ objectFit: "contain" }}
           />
         </div>
 
@@ -53,21 +57,29 @@ export default function Header() {
         <div className="flex items-center justify-end space-x-4">
           <HomeIcon className="navButton" />
           <MenuIcon className="h-6 md:hidden cursor-pointer" />
-          <div className="relative navButton">
-            <PaperAirplaneIcon className="navButton rotate-45" />
-            <div className="absolute -top-1 -right-2 text-xs w-5 h-5 bg-red-500 rounded-full text-white flex items-center justify-center animate-pulse">
-              3
-            </div>
-          </div>
-          <PlusCircleIcon className="navButton" />
-          <UserGroupIcon className="navButton" />
-          <HeartIcon className="navButton" />
 
-          <Image
-            className="w-8 rounded-full cursor-pointer"
-            src={ProfilePic}
-            alt="profile_pic"
-          />
+          {session ? (
+            <>
+              <div className="relative navButton">
+                <PaperAirplaneIcon className="navButton rotate-45" />
+                <div className="absolute -top-1 -right-2 text-xs w-5 h-5 bg-red-500 rounded-full text-white flex items-center justify-center animate-pulse">
+                  3
+                </div>
+              </div>
+              <PlusCircleIcon className="navButton" />
+              <UserGroupIcon className="navButton" />
+              <HeartIcon className="navButton" />
+
+              <img
+                onClick={signOut}
+                src={session.user.image}
+                alt="profile_pic"
+                className="w-10 h-10 rounded-full cursor-pointer"
+              />
+            </>
+          ) : (
+            <button onClick={signIn}>Sign in</button>
+          )}
         </div>
       </div>
     </header>
