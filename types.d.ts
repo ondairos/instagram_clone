@@ -1,4 +1,5 @@
 type SuggestionsType = {
+    company: { name: string };
     id: number;
     name: string;
     username: string;
