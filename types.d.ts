@@ -18,3 +18,12 @@ type SuggestionsType = {
     };
     website: string;
 };
+
+
+type Posts = {
+    id: string;
+    username: string;
+    userImg: string;
+    img: string;
+    caption: string;
+};
