@@ -18,6 +18,14 @@ export default function Header() {
   // console.log(session);
   const router = useRouter();
 
+  const handleSignOut = () => {
+    signOut();
+  };
+
+  const handleSignIn = () => {
+    signIn();
+  };
+
   return (
     <header className="shadow-md border-b bg-white sticky top-0 z-50">
       {/* left */}
@@ -78,14 +86,14 @@ export default function Header() {
               <HeartIcon className="navButton" />
 
               <img
-                onClick={signOut}
-                src={session.user.image}
+                onClick={handleSignOut}
+                src={session?.user?.image ?? ""}
                 alt="profile_pic"
                 className="w-10 h-10 rounded-full cursor-pointer"
               />
             </>
           ) : (
-            <button onClick={signIn}>Sign in</button>
+            <button onClick={handleSignIn}>Sign in</button>
           )}
         </div>
       </div>

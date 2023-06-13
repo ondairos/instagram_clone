@@ -28,3 +28,13 @@ type Posts = {
     img: string;
     caption: string;
 };
+
+
+type SessionType = {
+    user: {
+        username?: string | null | undefined;
+        name?: string | null | undefined;
+        email?: string | null | undefined;
+        image?: string | null | undefined;
+    } | null;
+};
