@@ -5,15 +5,17 @@ const POSTS = [
   {
     id: "123",
     username: "instagrammer1",
-    userImg: "https://links.papareact.com/3ke",
-    img: "https://links.papareact.com/3ke",
+    userImg:
+      "https://ondairos.github.io/portfolio/assets/IconPhotoPX-ad022387.jpg",
+    img: "https://ondairos.github.io/portfolio/assets/IconPhotoPX-ad022387.jpg",
     caption: "PLEASE LIKE AND SUBSCRIBE!!",
   },
   {
     id: "124",
     username: "korok1d2",
-    userImg: "https://links.papareact.com/3ke",
-    img: "https://links.papareact.com/3ke",
+    userImg:
+      "https://ondairos.github.io/portfolio/assets/IconPhotoPX-ad022387.jpg",
+    img: "https://ondairos.github.io/portfolio/assets/IconPhotoPX-ad022387.jpg",
     caption: "PLEASE LIKE AND SUBSCRIBE!!",
   },
 ];

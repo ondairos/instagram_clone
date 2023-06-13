@@ -18,6 +18,15 @@ export const authOptions = {
     // }
     pages: {
         signIn: "/auth/signin",
+    },
+    callbacks: {
+        // modify the session callback to provide more information about the user so we can use in MiniProfile
+        async session({ session, token, user }) {
+            session.user.username = session.user.name.split(" ").join("").toLowerCase()
+
+            session.user.uid = token.sub;
+            return session;
+        }
     }
 }
 
