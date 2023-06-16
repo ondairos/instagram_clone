@@ -12,6 +12,11 @@ export default function Modal() {
   const [selectedFile, setSelectedFile] = useState<string | ArrayBuffer | null>(
     null
   );
+  const captionRef = useRef(null);
+  const [loading, setLoading] = useState(false);
+
+  // upload picture function
+  const uploadPost = async () => {};
 
   // helper func addImageToPost
   const addImageToPost = (event: any) => {
@@ -107,6 +112,7 @@ export default function Modal() {
                         type="text"
                         className="border-none focus:ring-0 w-full text-center"
                         placeholder="Please enter a caption to your post..."
+                        ref={captionRef}
                       />
                     </div>
                   </div>
