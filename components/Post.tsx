@@ -10,6 +10,7 @@ import {
 } from "@heroicons/react/outline";
 
 import { HeartIcon as HeartIconFilled } from "@heroicons/react/solid";
+import { useSession } from "next-auth/react";
 
 type Props = {
   id: string;
@@ -20,6 +21,7 @@ type Props = {
 };
 
 export default function Post({ id, username, userImg, img, caption }: Props) {
+  const { data: session } = useSession();
   return (
     <div className="bg-white my-7 border rounded-sm">
       {/* header */}
@@ -37,14 +39,16 @@ export default function Post({ id, username, userImg, img, caption }: Props) {
       <img src={img} className="object-cover w-full" alt="" />
 
       {/* buttons */}
-      <div className="flex justify-between px-4 pt-4">
-        <div className="flex space-x-4 ">
-          <HeartIcon className="button" />
-          <ChatIcon className="button" />
-          <PaperAirplaneIcon className="button" />
+      {session && (
+        <div className="flex justify-between px-4 pt-4">
+          <div className="flex space-x-4 ">
+            <HeartIcon className="button" />
+            <ChatIcon className="button" />
+            <PaperAirplaneIcon className="button" />
+          </div>
+          <BookmarkIcon className="button" />
         </div>
-        <BookmarkIcon className="button" />
-      </div>
+      )}
 
       {/* caption */}
       <p className="p-5 truncate">
@@ -55,15 +59,17 @@ export default function Post({ id, username, userImg, img, caption }: Props) {
       {/* comments */}
 
       {/* input box */}
-      <form className="flex items-center p-4">
-        <EmojiHappyIcon className="button" />
-        <input
-          type="text"
-          placeholder="Add a comment..."
-          className="border-none flex-1 focus:ring-0 outline-none"
-        />
-        <button className="font-semibold text-blue-400">Post</button>
-      </form>
+      {session && (
+        <form className="flex items-center p-4">
+          <EmojiHappyIcon className="button" />
+          <input
+            type="text"
+            placeholder="Add a comment..."
+            className="border-none flex-1 focus:ring-0 outline-none"
+          />
+          <button className="font-semibold text-blue-400">Post</button>
+        </form>
+      )}
     </div>
   );
 }
