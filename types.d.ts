@@ -27,6 +27,7 @@ type Posts = {
     userImg: string;
     img: string;
     caption: string;
+    data(): function;
 };
 
 
@@ -38,3 +39,6 @@ type SessionType = {
         image?: string | null | undefined;
     } | null;
 };
+
+
+
