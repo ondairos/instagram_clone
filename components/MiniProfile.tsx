@@ -4,7 +4,7 @@ import React from "react";
 
 export default function MiniProfile() {
   const { data: session } = useSession();
-  console.log(session);
+  // console.log(session);
 
   const handleSignOut = () => {
     signOut();

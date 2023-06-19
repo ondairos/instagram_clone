@@ -20,9 +20,7 @@ export default function Modal() {
   // global state with recoil package
   const [open, setOpen] = useRecoilState(modalState);
   const filePickerRef = useRef(null);
-  const [selectedFile, setSelectedFile] = useState<string | ArrayBuffer | null>(
-    null
-  );
+  const [selectedFile, setSelectedFile] = useState<string>("");
   const captionRef = useRef(null);
   const [loading, setLoading] = useState(false);
 
@@ -61,7 +59,7 @@ export default function Modal() {
 
     setOpen(false);
     setLoading(false);
-    setSelectedFile(null);
+    setSelectedFile("");
   };
 
   // helper func addImageToPost
