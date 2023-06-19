@@ -18,6 +18,8 @@ import {
   orderBy,
   serverTimestamp,
   query,
+  QueryDocumentSnapshot,
+  DocumentData,
 } from "@firebase/firestore";
 import { db } from "../firebase";
 import Moment from "react-moment";
@@ -31,9 +33,11 @@ type Props = {
 };
 
 export default function Post({ id, username, userImg, img, caption }: Props) {
-  const { data: session } = useSession();
+  const { data: session } = useSession<boolean>();
   // comments state
-  const [comments, setComments] = useState([]);
+  const [comments, setComments] = useState<
+    QueryDocumentSnapshot<DocumentData>[]
+  >([]);
   const [comment, setComment] = useState<string>("");
 
   // useffect for comment display
@@ -61,6 +65,7 @@ export default function Post({ id, username, userImg, img, caption }: Props) {
 
     await addDoc(collection(db, "posts", id, "comments"), {
       comment: commentToSend,
+      // @ts-ignore
       username: session?.user?.username,
       userImage: session?.user?.image,
       timestamp: serverTimestamp(),

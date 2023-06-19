@@ -23,7 +23,13 @@ export default function Stories() {
       {/* Stories */}
       {/* show own individual story */}
       {session && (
-        <Story img={session?.user?.image} username={session?.user?.username} />
+        <Story
+          img={session?.user?.image || ""}
+          username={
+            // @ts-ignore
+            session?.user?.username ?? ""
+          }
+        />
       )}
       {suggestions.map((element) => (
         <Story

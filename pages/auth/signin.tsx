@@ -6,6 +6,7 @@ import Header from "@/components/Header";
 type Provider = {
   id: string;
   name: string;
+  username: string;
 };
 
 type SigninProps = {

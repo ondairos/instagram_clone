@@ -39,6 +39,3 @@ type SessionType = {
         image?: string | null | undefined;
     } | null;
 };
-
-
-

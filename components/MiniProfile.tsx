@@ -19,7 +19,12 @@ export default function MiniProfile() {
       />
 
       <div className="flex-1 mx-4">
-        <h2 className="font-bold">{session?.user?.username}</h2>
+        <h2 className="font-bold">
+          {
+            // @ts-ignore
+            session?.user?.username
+          }
+        </h2>
         <h3 className="text-sm text-gray-400">Welcome to Instagram</h3>
       </div>
       <button
