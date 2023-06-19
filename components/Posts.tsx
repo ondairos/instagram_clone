@@ -25,6 +25,9 @@ import { db } from "../firebase";
 export default function Posts() {
   // state for posts
   const [posts, setPosts] = useState([]);
+  // comments state
+  const [comments, setComments] = useState([]);
+  const [comment, setComment] = useState([]);
 
   useEffect(
     () =>

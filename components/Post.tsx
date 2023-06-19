@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import React from "react";
+import React, { useState } from "react";
 import {
   BookmarkIcon,
   ChatIcon,
@@ -11,6 +11,8 @@ import {
 
 import { HeartIcon as HeartIconFilled } from "@heroicons/react/solid";
 import { useSession } from "next-auth/react";
+import { addDoc, collection, serverTimestamp } from "@firebase/firestore";
+import { db } from "../firebase";
 
 type Props = {
   id: string;
@@ -22,6 +24,28 @@ type Props = {
 
 export default function Post({ id, username, userImg, img, caption }: Props) {
   const { data: session } = useSession();
+  // comments state
+  const [comments, setComments] = useState([]);
+  const [comment, setComment] = useState<string>("");
+
+  const commentSetFunc = (event: React.ChangeEvent<HTMLInputElement>) =>
+    setComment(event.target.value);
+
+  // comment send to FIREBASE
+  const sendComment = async (event: React.SyntheticEvent) => {
+    event.preventDefault();
+
+    const commentToSend = comment;
+    setComment("");
+
+    await addDoc(collection(db, "posts", id, "comments"), {
+      comment: commentToSend,
+      username: session?.user?.username,
+      userImage: session?.user?.image,
+      timestamp: serverTimestamp(),
+    });
+  };
+
   return (
     <div className="bg-white my-7 border rounded-sm">
       {/* header */}
@@ -65,9 +89,18 @@ export default function Post({ id, username, userImg, img, caption }: Props) {
           <input
             type="text"
             placeholder="Add a comment..."
+            value={comment}
+            onChange={commentSetFunc}
             className="border-none flex-1 focus:ring-0 outline-none"
           />
-          <button className="font-semibold text-blue-400">Post</button>
+          <button
+            type="submit"
+            disabled={!comment.trim()}
+            onClick={sendComment}
+            className="font-semibold text-blue-400"
+          >
+            Post
+          </button>
         </form>
       )}
     </div>
