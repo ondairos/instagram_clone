@@ -63,6 +63,7 @@ export default function Post({ id, username, userImg, img, caption }: Props) {
   useEffect(
     () =>
       onSnapshot(collection(db, "posts", id, "likes"), (snapshot) =>
+        // @ts-ignore
         setLikes(snapshot.docs)
       ),
     [db, id]
@@ -71,6 +72,7 @@ export default function Post({ id, username, userImg, img, caption }: Props) {
   // useEffect for has liked-depended on likes array
   useEffect(() => {
     setHasLiked(
+      // @ts-ignore
       likes.findIndex((element) => element.id === session?.user?.uid) !== -1
     );
   }, [likes]);
@@ -79,10 +81,13 @@ export default function Post({ id, username, userImg, img, caption }: Props) {
   const likePost = async () => {
     if (hasLiked) {
       // delete the like
+      // @ts-ignore
       await deleteDoc(doc(db, "posts", id, "likes", session?.user?.uid));
     } else {
       // like post
+      // @ts-ignore
       await setDoc(doc(db, "posts", id, "likes", session?.user?.uid), {
+        // @ts-ignore
         username: session?.user?.username,
       });
     }

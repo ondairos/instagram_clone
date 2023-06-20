@@ -38,8 +38,11 @@ export default function Modal() {
     // 4 get a download image url from firebase storage and update original post
 
     const docRef = await addDoc(collection(db, "posts"), {
+      // @ts-ignore
       username: session?.user?.username,
+      // @ts-ignore
       caption: captionRef.current.value,
+      // @ts-ignore
       profileImg: session?.user.image,
       timestamp: serverTimestamp(),
     });
@@ -71,6 +74,7 @@ export default function Modal() {
     }
     // getting the file in a way that we can store in state
     reader.onload = (readerEvent) => {
+      // @ts-ignore
       setSelectedFile(readerEvent.target.result);
     };
   };
@@ -119,12 +123,18 @@ export default function Modal() {
                   <img
                     src={selectedFile}
                     className="w-full object-contain cursor-pointer"
-                    onClick={() => setSelectedFile(null)}
+                    onClick={
+                      // @ts-ignore
+                      () => setSelectedFile(null)
+                    }
                     alt="image"
                   ></img>
                 ) : (
                   <div
-                    onClick={() => filePickerRef.current.click()}
+                    onClick={
+                      // @ts-ignore
+                      () => filePickerRef.current.click()
+                    }
                     className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100 cursor-pointer"
                   >
                     <CameraIcon
