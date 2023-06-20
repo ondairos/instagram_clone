@@ -82,7 +82,7 @@ export default function Header() {
               <div className="relative navButton">
                 <PaperAirplaneIcon className="navButton rotate-45" />
                 <div className="absolute -top-1 -right-2 text-xs w-5 h-5 bg-red-500 rounded-full text-white flex items-center justify-center animate-pulse">
-                  3
+                  5
                 </div>
               </div>
               <PlusCircleIcon

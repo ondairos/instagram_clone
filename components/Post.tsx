@@ -16,10 +16,13 @@ import {
   collection,
   onSnapshot,
   orderBy,
+  setDoc,
   serverTimestamp,
   query,
+  doc,
   QueryDocumentSnapshot,
   DocumentData,
+  deleteDoc,
 } from "@firebase/firestore";
 import { db } from "../firebase";
 import Moment from "react-moment";
@@ -34,6 +37,9 @@ type Props = {
 
 export default function Post({ id, username, userImg, img, caption }: Props) {
   const { data: session } = useSession<boolean>();
+  const [likes, setLikes] = useState([]);
+  const [hasLiked, setHasLiked] = useState<boolean>(false);
+
   // comments state
   const [comments, setComments] = useState<
     QueryDocumentSnapshot<DocumentData>[]
@@ -52,6 +58,35 @@ export default function Post({ id, username, userImg, img, caption }: Props) {
       ),
     [db]
   );
+
+  // listen to likes
+  useEffect(
+    () =>
+      onSnapshot(collection(db, "posts", id, "likes"), (snapshot) =>
+        setLikes(snapshot.docs)
+      ),
+    [db, id]
+  );
+
+  // useEffect for has liked-depended on likes array
+  useEffect(() => {
+    setHasLiked(
+      likes.findIndex((element) => element.id === session?.user?.uid) !== -1
+    );
+  }, [likes]);
+
+  // like post function
+  const likePost = async () => {
+    if (hasLiked) {
+      // delete the like
+      await deleteDoc(doc(db, "posts", id, "likes", session?.user?.uid));
+    } else {
+      // like post
+      await setDoc(doc(db, "posts", id, "likes", session?.user?.uid), {
+        username: session?.user?.username,
+      });
+    }
+  };
 
   const commentSetFunc = (event: React.ChangeEvent<HTMLInputElement>) =>
     setComment(event.target.value);
@@ -92,7 +127,14 @@ export default function Post({ id, username, userImg, img, caption }: Props) {
       {session && (
         <div className="flex justify-between px-4 pt-4">
           <div className="flex space-x-4 ">
-            <HeartIcon className="button" />
+            {hasLiked ? (
+              <HeartIconFilled
+                onClick={likePost}
+                className="button text-red-600"
+              />
+            ) : (
+              <HeartIcon onClick={likePost} className="button" />
+            )}
             <ChatIcon className="button" />
             <PaperAirplaneIcon className="button" />
           </div>
@@ -102,6 +144,9 @@ export default function Post({ id, username, userImg, img, caption }: Props) {
 
       {/* caption */}
       <p className="p-5 truncate">
+        {likes.length > 0 && (
+          <p className="font-bold mb-1">{likes.length} likes</p>
+        )}
         <span className="font-bold mr-1">{username} </span>
         {caption}
       </p>
